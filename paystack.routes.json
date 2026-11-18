@@ -1,0 +1,1052 @@
+{
+  "source": {
+    "project": "paystack",
+    "version": "2026-11-16",
+    "license": "API reference is Paystack documentation. This inventory is original wording.",
+    "reference": "https://paystack.com/docs/api/",
+    "extractor": "Hand-written from the Paystack API reference and the PaystackOSS paystack-python endpoint table. Each purpose is original wording. Risk is read, write, or money. scripts/gen-operations.mjs maps every route or records an exclusion."
+  },
+  "counts": {
+    "mapped": 64,
+    "excluded": 56,
+    "read": 42,
+    "write": 15,
+    "money": 7
+  },
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/transaction",
+      "operationId": "transaction_list",
+      "tool": "paystack_transactions",
+      "action": "list",
+      "risk": "read",
+      "purpose": "List transactions so a matcher can line payments up with open invoices.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/transaction/{id}",
+      "operationId": "transaction_fetch",
+      "tool": "paystack_transactions",
+      "action": "fetch",
+      "risk": "read",
+      "purpose": "Fetch one transaction by its numeric id.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/transaction/verify/{reference}",
+      "operationId": "transaction_verify",
+      "tool": "paystack_transactions",
+      "action": "verify",
+      "risk": "read",
+      "purpose": "Verify a transaction by the reference the merchant stored.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/transaction/timeline/{id_or_reference}",
+      "operationId": "transaction_timeline",
+      "tool": "paystack_transactions",
+      "action": "timeline",
+      "risk": "read",
+      "purpose": "Read the timeline of attempts and events for one transaction.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/transaction/totals",
+      "operationId": "transaction_totals",
+      "tool": "paystack_transactions",
+      "action": "totals",
+      "risk": "read",
+      "purpose": "Sum successful transaction volume over a date window.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/transaction/export",
+      "operationId": "transaction_export",
+      "tool": "paystack_transactions",
+      "action": "export",
+      "risk": "read",
+      "purpose": "Ask Paystack for an export of transactions in a date window.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/transaction/initialize",
+      "operationId": "transaction_initialize",
+      "tool": "paystack_transactions",
+      "action": "initialize",
+      "risk": "money",
+      "purpose": "Open a charge flow by creating an authorization URL the customer can pay.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/transaction/charge_authorization",
+      "operationId": "transaction_charge_authorization",
+      "tool": "paystack_transactions",
+      "action": "charge_authorization",
+      "risk": "money",
+      "purpose": "Debit a saved authorization for a positive subunit amount.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/transaction/partial_debit",
+      "operationId": "transaction_partial_debit",
+      "tool": "paystack_transactions",
+      "action": "partial_debit",
+      "risk": "money",
+      "purpose": "Collect up to a subunit amount from a saved authorization, with an optional floor.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/customer",
+      "operationId": "customer_list",
+      "tool": "paystack_customers",
+      "action": "list",
+      "risk": "read",
+      "purpose": "List customers for invoice and identity checks.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/customer/{code}",
+      "operationId": "customer_fetch",
+      "tool": "paystack_customers",
+      "action": "fetch",
+      "risk": "read",
+      "purpose": "Fetch one customer by email or customer code.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/customer",
+      "operationId": "customer_create",
+      "tool": "paystack_customers",
+      "action": "create",
+      "risk": "write",
+      "purpose": "Create a customer record for later invoices and charges.",
+      "exclude": false
+    },
+    {
+      "method": "PUT",
+      "path": "/customer/{code}",
+      "operationId": "customer_update",
+      "tool": "paystack_customers",
+      "action": "update",
+      "risk": "write",
+      "purpose": "Update the name, phone, or metadata on a customer.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/customer/{code}/identification",
+      "operationId": "customer_validate",
+      "tool": "paystack_customers",
+      "action": "validate",
+      "risk": "write",
+      "purpose": "Submit identification details so Paystack can validate the customer.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/customer/set_risk_action",
+      "operationId": "customer_set_risk_action",
+      "tool": "paystack_customers",
+      "action": "set_risk_action",
+      "risk": "write",
+      "purpose": "Whitelist (allow) or blacklist (deny) a customer.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/paymentrequest",
+      "operationId": "paymentrequest_list",
+      "tool": "paystack_invoices",
+      "action": "list",
+      "risk": "read",
+      "purpose": "List payment requests, which Paystack uses as invoices.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/paymentrequest/{id}",
+      "operationId": "paymentrequest_fetch",
+      "tool": "paystack_invoices",
+      "action": "fetch",
+      "risk": "read",
+      "purpose": "Fetch one payment request by id or code.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/paymentrequest",
+      "operationId": "paymentrequest_create",
+      "tool": "paystack_invoices",
+      "action": "create",
+      "risk": "write",
+      "purpose": "Create a payment request the customer can pay later.",
+      "exclude": false
+    },
+    {
+      "method": "PUT",
+      "path": "/paymentrequest/{id}",
+      "operationId": "paymentrequest_update",
+      "tool": "paystack_invoices",
+      "action": "update",
+      "risk": "write",
+      "purpose": "Update the description, due date, or amount on a payment request.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/paymentrequest/verify/{id}",
+      "operationId": "paymentrequest_verify",
+      "tool": "paystack_invoices",
+      "action": "verify",
+      "risk": "read",
+      "purpose": "Verify a payment request by its code or id.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/paymentrequest/notify/{id}",
+      "operationId": "paymentrequest_notify",
+      "tool": "paystack_invoices",
+      "action": "notify",
+      "risk": "write",
+      "purpose": "Ask Paystack to notify the customer about a payment request.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/paymentrequest/finalize/{id}",
+      "operationId": "paymentrequest_finalize",
+      "tool": "paystack_invoices",
+      "action": "finalize",
+      "risk": "write",
+      "purpose": "Finalize a draft payment request so it can be paid.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/paymentrequest/archive/{id}",
+      "operationId": "paymentrequest_archive",
+      "tool": "paystack_invoices",
+      "action": "archive",
+      "risk": "write",
+      "purpose": "Archive a payment request so it drops out of the open list.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/paymentrequest/totals",
+      "operationId": "paymentrequest_totals",
+      "tool": "paystack_invoices",
+      "action": "totals",
+      "risk": "read",
+      "purpose": "Sum payment-request totals over a date window.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/settlement",
+      "operationId": "settlement_list",
+      "tool": "paystack_settlements",
+      "action": "list",
+      "risk": "read",
+      "purpose": "List settlements so cash application can see what Paystack paid out.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/settlement/{id}/transaction",
+      "operationId": "settlement_transactions",
+      "tool": "paystack_settlements",
+      "action": "transactions",
+      "risk": "read",
+      "purpose": "List the transactions that make up one settlement.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/refund",
+      "operationId": "refund_list",
+      "tool": "paystack_refunds",
+      "action": "list",
+      "risk": "read",
+      "purpose": "List refunds for collections and support questions.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/refund/{id}",
+      "operationId": "refund_fetch",
+      "tool": "paystack_refunds",
+      "action": "fetch",
+      "risk": "read",
+      "purpose": "Fetch one refund by id.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/refund",
+      "operationId": "refund_create",
+      "tool": "paystack_refunds",
+      "action": "create",
+      "risk": "money",
+      "purpose": "Refund a transaction, in full or for a positive subunit amount.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/dispute",
+      "operationId": "dispute_list",
+      "tool": "paystack_disputes",
+      "action": "list",
+      "risk": "read",
+      "purpose": "List disputes so chasing can stop on a contested invoice.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/dispute/{id}",
+      "operationId": "dispute_fetch",
+      "tool": "paystack_disputes",
+      "action": "fetch",
+      "risk": "read",
+      "purpose": "Fetch one dispute by id.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/dispute/transaction/{id}",
+      "operationId": "dispute_transaction",
+      "tool": "paystack_disputes",
+      "action": "transaction",
+      "risk": "read",
+      "purpose": "List disputes filed against one transaction.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/dispute/export",
+      "operationId": "dispute_export",
+      "tool": "paystack_disputes",
+      "action": "export",
+      "risk": "read",
+      "purpose": "Ask Paystack for an export of disputes in a date window.",
+      "exclude": false
+    },
+    {
+      "method": "PUT",
+      "path": "/dispute/{id}",
+      "operationId": "dispute_update",
+      "tool": "paystack_disputes",
+      "action": "update",
+      "risk": "write",
+      "purpose": "Update dispute details such as the refund amount you are willing to offer.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/dispute/{id}/evidence",
+      "operationId": "dispute_evidence",
+      "tool": "paystack_disputes",
+      "action": "evidence",
+      "risk": "write",
+      "purpose": "Attach written evidence to a dispute. Binary uploads are not sent.",
+      "exclude": false
+    },
+    {
+      "method": "PUT",
+      "path": "/dispute/{id}/resolve",
+      "operationId": "dispute_resolve",
+      "tool": "paystack_disputes",
+      "action": "resolve",
+      "risk": "write",
+      "purpose": "Resolve a dispute as accepted or declined.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/transfer",
+      "operationId": "transfer_list",
+      "tool": "paystack_transfers",
+      "action": "list",
+      "risk": "read",
+      "purpose": "List transfers leaving the Paystack balance.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/transfer/{code}",
+      "operationId": "transfer_fetch",
+      "tool": "paystack_transfers",
+      "action": "fetch",
+      "risk": "read",
+      "purpose": "Fetch one transfer by id or transfer code.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/transfer/verify/{reference}",
+      "operationId": "transfer_verify",
+      "tool": "paystack_transfers",
+      "action": "verify",
+      "risk": "read",
+      "purpose": "Verify a transfer by the reference sent when it was created.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/transfer",
+      "operationId": "transfer_initiate",
+      "tool": "paystack_transfers",
+      "action": "initiate",
+      "risk": "money",
+      "purpose": "Send money from the Paystack balance to a transfer recipient.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/transfer/finalize_transfer",
+      "operationId": "transfer_finalize",
+      "tool": "paystack_transfers",
+      "action": "finalize",
+      "risk": "money",
+      "purpose": "Finalize a queued transfer with the one-time password Paystack sent.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/transfer/bulk",
+      "operationId": "transfer_bulk",
+      "tool": "paystack_transfers",
+      "action": "bulk",
+      "risk": "money",
+      "purpose": "Send one batch of transfers from the Paystack balance.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/transferrecipient",
+      "operationId": "recipient_list",
+      "tool": "paystack_recipients",
+      "action": "list",
+      "risk": "read",
+      "purpose": "List transfer recipients.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/transferrecipient/{code}",
+      "operationId": "recipient_fetch",
+      "tool": "paystack_recipients",
+      "action": "fetch",
+      "risk": "read",
+      "purpose": "Fetch one transfer recipient by id or recipient code.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/transferrecipient",
+      "operationId": "recipient_create",
+      "tool": "paystack_recipients",
+      "action": "create",
+      "risk": "write",
+      "purpose": "Create a transfer recipient for a bank account or mobile-money number.",
+      "exclude": false
+    },
+    {
+      "method": "PUT",
+      "path": "/transferrecipient/{code}",
+      "operationId": "recipient_update",
+      "tool": "paystack_recipients",
+      "action": "update",
+      "risk": "write",
+      "purpose": "Update the name or email stored on a transfer recipient.",
+      "exclude": false
+    },
+    {
+      "method": "DELETE",
+      "path": "/transferrecipient/{code}",
+      "operationId": "recipient_delete",
+      "tool": "paystack_recipients",
+      "action": "delete",
+      "risk": "write",
+      "purpose": "Delete a transfer recipient so it cannot be paid.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/balance",
+      "operationId": "balance_fetch",
+      "tool": "paystack_balance",
+      "action": "balance",
+      "risk": "read",
+      "purpose": "Read the Paystack balance by currency.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/balance/ledger",
+      "operationId": "balance_ledger",
+      "tool": "paystack_balance",
+      "action": "ledger",
+      "risk": "read",
+      "purpose": "Read balance-ledger lines for a date window.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/bank",
+      "operationId": "bank_list",
+      "tool": "paystack_lookups",
+      "action": "banks",
+      "risk": "read",
+      "purpose": "List banks, including Ghana mobile-money when country and type say so.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/bank/resolve",
+      "operationId": "bank_resolve",
+      "tool": "paystack_lookups",
+      "action": "resolve_account",
+      "risk": "read",
+      "purpose": "Resolve an account number to the account name Paystack has on file.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/country",
+      "operationId": "country_list",
+      "tool": "paystack_lookups",
+      "action": "countries",
+      "risk": "read",
+      "purpose": "List countries Paystack can process.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/address_verification/states",
+      "operationId": "states_list",
+      "tool": "paystack_lookups",
+      "action": "states",
+      "risk": "read",
+      "purpose": "List states for address verification in one country.",
+      "exclude": false
+    },
+    {
+      "method": "POST",
+      "path": "/bank/validate",
+      "operationId": "bank_validate",
+      "tool": "paystack_lookups",
+      "action": "verify_account",
+      "risk": "read",
+      "purpose": "Check that a bank account name matches the number. This does not change Paystack data.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/subaccount",
+      "operationId": "subaccount_list",
+      "tool": "paystack_catalog",
+      "action": "list_subaccounts",
+      "risk": "read",
+      "purpose": "List subaccounts. Creating or editing them is out of scope.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/subaccount/{code}",
+      "operationId": "subaccount_fetch",
+      "tool": "paystack_catalog",
+      "action": "fetch_subaccount",
+      "risk": "read",
+      "purpose": "Fetch one subaccount by id or code.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/plan",
+      "operationId": "plan_list",
+      "tool": "paystack_catalog",
+      "action": "list_plans",
+      "risk": "read",
+      "purpose": "List plans. Creating or editing them is out of scope.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/plan/{code}",
+      "operationId": "plan_fetch",
+      "tool": "paystack_catalog",
+      "action": "fetch_plan",
+      "risk": "read",
+      "purpose": "Fetch one plan by id or code.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/subscription",
+      "operationId": "subscription_list",
+      "tool": "paystack_catalog",
+      "action": "list_subscriptions",
+      "risk": "read",
+      "purpose": "List subscriptions. Enabling or disabling them is out of scope.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/subscription/{code}",
+      "operationId": "subscription_fetch",
+      "tool": "paystack_catalog",
+      "action": "fetch_subscription",
+      "risk": "read",
+      "purpose": "Fetch one subscription by id or code.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/product",
+      "operationId": "product_list",
+      "tool": "paystack_catalog",
+      "action": "list_products",
+      "risk": "read",
+      "purpose": "List products. Creating or editing them is out of scope.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/product/{id}",
+      "operationId": "product_fetch",
+      "tool": "paystack_catalog",
+      "action": "fetch_product",
+      "risk": "read",
+      "purpose": "Fetch one product by id.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/page",
+      "operationId": "page_list",
+      "tool": "paystack_catalog",
+      "action": "list_pages",
+      "risk": "read",
+      "purpose": "List payment pages. Creating or editing them is out of scope.",
+      "exclude": false
+    },
+    {
+      "method": "GET",
+      "path": "/page/{id}",
+      "operationId": "page_fetch",
+      "tool": "paystack_catalog",
+      "action": "fetch_page",
+      "risk": "read",
+      "purpose": "Fetch one payment page by id or slug.",
+      "exclude": false
+    }
+  ],
+  "excluded": [
+    {
+      "method": "POST",
+      "path": "/charge",
+      "operationId": "charge_create",
+      "exclude": true,
+      "reason": "Card, PIN, and OTP charge steps collect payment credentials. Out of scope for these bots."
+    },
+    {
+      "method": "POST",
+      "path": "/charge/submit_pin",
+      "operationId": "charge_submit_pin",
+      "exclude": true,
+      "reason": "PIN submission is a cardholder secret. Not exposed."
+    },
+    {
+      "method": "POST",
+      "path": "/charge/submit_otp",
+      "operationId": "charge_submit_otp",
+      "exclude": true,
+      "reason": "OTP submission for a card charge is not exposed."
+    },
+    {
+      "method": "POST",
+      "path": "/charge/submit_phone",
+      "operationId": "charge_submit_phone",
+      "exclude": true,
+      "reason": "Phone step of the interactive charge API is not exposed."
+    },
+    {
+      "method": "POST",
+      "path": "/charge/submit_birthday",
+      "operationId": "charge_submit_birthday",
+      "exclude": true,
+      "reason": "Birthday step of the interactive charge API is not exposed."
+    },
+    {
+      "method": "POST",
+      "path": "/charge/submit_address",
+      "operationId": "charge_submit_address",
+      "exclude": true,
+      "reason": "Address step of the interactive charge API is not exposed."
+    },
+    {
+      "method": "GET",
+      "path": "/charge/{reference}",
+      "operationId": "charge_check",
+      "exclude": true,
+      "reason": "Pending interactive charge status is outside the priority list."
+    },
+    {
+      "method": "POST",
+      "path": "/bulkcharge",
+      "operationId": "bulkcharge_initiate",
+      "exclude": true,
+      "reason": "Bulk charge debits many saved cards. Not in the Accounts Team priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/bulkcharge",
+      "operationId": "bulkcharge_list",
+      "exclude": true,
+      "reason": "Bulk-charge batches are outside the priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/bulkcharge/{code}",
+      "operationId": "bulkcharge_fetch",
+      "exclude": true,
+      "reason": "Bulk-charge batch fetch is outside the priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/bulkcharge/{code}/charges",
+      "operationId": "bulkcharge_charges",
+      "exclude": true,
+      "reason": "Charges inside a bulk batch are outside the priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/bulkcharge/pause/{code}",
+      "operationId": "bulkcharge_pause",
+      "exclude": true,
+      "reason": "Pausing a bulk charge is a write outside the priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/bulkcharge/resume/{code}",
+      "operationId": "bulkcharge_resume",
+      "exclude": true,
+      "reason": "Resuming a bulk charge continues debits. Not exposed."
+    },
+    {
+      "method": "POST",
+      "path": "/transaction/check_authorization",
+      "operationId": "transaction_check_authorization",
+      "exclude": true,
+      "reason": "Authorization probe is not in the priority list and is easy to confuse with a charge."
+    },
+    {
+      "method": "GET",
+      "path": "/transaction/{id}/event",
+      "operationId": "transaction_event",
+      "exclude": true,
+      "reason": "Transaction event log is outside the priority list. Timeline is mapped."
+    },
+    {
+      "method": "GET",
+      "path": "/transaction/{id}/session",
+      "operationId": "transaction_session",
+      "exclude": true,
+      "reason": "Transaction session lookup is outside the priority list."
+    },
+    {
+      "method": "POST",
+      "path": "/customer/deactivate_authorization",
+      "operationId": "customer_deactivate_authorization",
+      "exclude": true,
+      "reason": "Deactivating a saved card is outside the priority list."
+    },
+    {
+      "method": "POST",
+      "path": "/dedicated_account",
+      "operationId": "dva_create",
+      "exclude": true,
+      "reason": "Dedicated virtual accounts are outside the priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/dedicated_account",
+      "operationId": "dva_list",
+      "exclude": true,
+      "reason": "Dedicated virtual accounts are outside the priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/dedicated_account/{account_id}",
+      "operationId": "dva_fetch",
+      "exclude": true,
+      "reason": "Dedicated virtual accounts are outside the priority list."
+    },
+    {
+      "method": "DELETE",
+      "path": "/dedicated_account/{account_id}",
+      "operationId": "dva_deactivate",
+      "exclude": true,
+      "reason": "Dedicated virtual accounts are outside the priority list."
+    },
+    {
+      "method": "POST",
+      "path": "/dedicated_account/split",
+      "operationId": "dva_add_split",
+      "exclude": true,
+      "reason": "Dedicated-account splits are outside the priority list."
+    },
+    {
+      "method": "DELETE",
+      "path": "/dedicated_account/split",
+      "operationId": "dva_remove_split",
+      "exclude": true,
+      "reason": "Dedicated-account splits are outside the priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/dedicated_account/available_providers",
+      "operationId": "dva_providers",
+      "exclude": true,
+      "reason": "Dedicated-account providers are outside the priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/dispute/{id}/upload_url",
+      "operationId": "dispute_upload_url",
+      "exclude": true,
+      "reason": "Binary evidence upload is not sent. Written evidence is mapped."
+    },
+    {
+      "method": "GET",
+      "path": "/integration/payment_session_timeout",
+      "operationId": "integration_timeout_get",
+      "exclude": true,
+      "reason": "Integration settings are outside the priority list."
+    },
+    {
+      "method": "PUT",
+      "path": "/integration/payment_session_timeout",
+      "operationId": "integration_timeout_put",
+      "exclude": true,
+      "reason": "Integration settings are outside the priority list."
+    },
+    {
+      "method": "POST",
+      "path": "/page",
+      "operationId": "page_create",
+      "exclude": true,
+      "reason": "Payment-page writes are out of scope. Reads are mapped."
+    },
+    {
+      "method": "PUT",
+      "path": "/page/{id}",
+      "operationId": "page_update",
+      "exclude": true,
+      "reason": "Payment-page writes are out of scope. Reads are mapped."
+    },
+    {
+      "method": "POST",
+      "path": "/page/{id}/product",
+      "operationId": "page_add_products",
+      "exclude": true,
+      "reason": "Payment-page product edits are out of scope."
+    },
+    {
+      "method": "GET",
+      "path": "/page/check_slug_availability/{slug}",
+      "operationId": "page_slug",
+      "exclude": true,
+      "reason": "Slug checks are not needed for the read-only page tools."
+    },
+    {
+      "method": "POST",
+      "path": "/product",
+      "operationId": "product_create",
+      "exclude": true,
+      "reason": "Product writes are out of scope. Reads are mapped."
+    },
+    {
+      "method": "PUT",
+      "path": "/product/{id}",
+      "operationId": "product_update",
+      "exclude": true,
+      "reason": "Product writes are out of scope. Reads are mapped."
+    },
+    {
+      "method": "DELETE",
+      "path": "/product/{id}",
+      "operationId": "product_delete",
+      "exclude": true,
+      "reason": "Product deletes are out of scope."
+    },
+    {
+      "method": "POST",
+      "path": "/plan",
+      "operationId": "plan_create",
+      "exclude": true,
+      "reason": "Plan writes are out of scope. Reads are mapped."
+    },
+    {
+      "method": "PUT",
+      "path": "/plan/{code}",
+      "operationId": "plan_update",
+      "exclude": true,
+      "reason": "Plan writes are out of scope. Reads are mapped."
+    },
+    {
+      "method": "POST",
+      "path": "/subaccount",
+      "operationId": "subaccount_create",
+      "exclude": true,
+      "reason": "Subaccount writes are out of scope. Reads are mapped."
+    },
+    {
+      "method": "PUT",
+      "path": "/subaccount/{code}",
+      "operationId": "subaccount_update",
+      "exclude": true,
+      "reason": "Subaccount writes are out of scope. Reads are mapped."
+    },
+    {
+      "method": "POST",
+      "path": "/subscription",
+      "operationId": "subscription_create",
+      "exclude": true,
+      "reason": "Subscription writes can start recurring debits. Reads only."
+    },
+    {
+      "method": "POST",
+      "path": "/subscription/disable",
+      "operationId": "subscription_disable",
+      "exclude": true,
+      "reason": "Disabling a subscription is a write outside the cheap-read scope."
+    },
+    {
+      "method": "POST",
+      "path": "/subscription/enable",
+      "operationId": "subscription_enable",
+      "exclude": true,
+      "reason": "Enabling a subscription resumes debits. Not exposed."
+    },
+    {
+      "method": "POST",
+      "path": "/subscription/{code}/manage/email",
+      "operationId": "subscription_manage_email",
+      "exclude": true,
+      "reason": "Subscription management email is a customer message. Not exposed."
+    },
+    {
+      "method": "POST",
+      "path": "/subscription/{code}/manage/link",
+      "operationId": "subscription_manage_link",
+      "exclude": true,
+      "reason": "Subscription management links are outside the priority list."
+    },
+    {
+      "method": "POST",
+      "path": "/split",
+      "operationId": "split_create",
+      "exclude": true,
+      "reason": "Split configuration is outside the priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/split",
+      "operationId": "split_list",
+      "exclude": true,
+      "reason": "Split configuration is outside the priority list."
+    },
+    {
+      "method": "GET",
+      "path": "/split/{id}",
+      "operationId": "split_fetch",
+      "exclude": true,
+      "reason": "Split configuration is outside the priority list."
+    },
+    {
+      "method": "PUT",
+      "path": "/split/{id}",
+      "operationId": "split_update",
+      "exclude": true,
+      "reason": "Split configuration is outside the priority list."
+    },
+    {
+      "method": "POST",
+      "path": "/split/{id}/subaccount/add",
+      "operationId": "split_add_subaccount",
+      "exclude": true,
+      "reason": "Split membership changes are outside the priority list."
+    },
+    {
+      "method": "POST",
+      "path": "/split/{id}/subaccount/remove",
+      "operationId": "split_remove_subaccount",
+      "exclude": true,
+      "reason": "Split membership changes are outside the priority list."
+    },
+    {
+      "method": "POST",
+      "path": "/transfer/disable_otp",
+      "operationId": "transfer_disable_otp",
+      "exclude": true,
+      "reason": "Turning off transfer OTP weakens the account. Not exposed."
+    },
+    {
+      "method": "POST",
+      "path": "/transfer/disable_otp_finalize",
+      "operationId": "transfer_disable_otp_finalize",
+      "exclude": true,
+      "reason": "Finalizing OTP disable is not exposed."
+    },
+    {
+      "method": "POST",
+      "path": "/transfer/enable_otp",
+      "operationId": "transfer_enable_otp",
+      "exclude": true,
+      "reason": "Transfer OTP settings are account-wide and not exposed."
+    },
+    {
+      "method": "POST",
+      "path": "/transfer/resend_otp",
+      "operationId": "transfer_resend_otp",
+      "exclude": true,
+      "reason": "OTP resend is outside the priority list. Finalize is mapped and money-gated."
+    },
+    {
+      "method": "GET",
+      "path": "/transfer/export",
+      "operationId": "transfer_export",
+      "exclude": true,
+      "reason": "Transfer export is outside the priority list. List and verify are mapped."
+    },
+    {
+      "method": "POST",
+      "path": "/transferrecipient/bulk",
+      "operationId": "recipient_bulk",
+      "exclude": true,
+      "reason": "Bulk recipient create is outside the priority list. Single create is mapped."
+    },
+    {
+      "method": "GET",
+      "path": "/decision/bin/{bin}",
+      "operationId": "bin_resolve",
+      "exclude": true,
+      "reason": "Card BIN lookup is outside the priority list."
+    }
+  ]
+}
